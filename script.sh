@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Trip Count
-~/clickhouse local \
+clickhouse local \
 -q "SELECT count(*) y1__num_trips
 FROM file('green_tripdata/*', 'Parquet') 
 FORMAT JSON 

@@ -22,6 +22,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - uses: pushboard/clickhouse-local-github-action@clickhouse-local
+      - uses: pushboard/clickhouse-local-github-action@v1
         with:
           query: '"select * from file(\"data/green_tripdata/green_tripdata_2022-04.parquet\") limit 1 FORMAT JSON"'

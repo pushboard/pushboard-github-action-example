@@ -16,12 +16,12 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: clickhouse/clickhouse-server
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - uses: pushboard/clickhouse-local-github-action@v1
-        with:
-          query: '"select * from file(\"data/green_tripdata/green_tripdata_2022-04.parquet\") limit 1 FORMAT JSON"'
+      # Runs a single command using the runners shell
+      - name: Push
+        run: ./script.sh

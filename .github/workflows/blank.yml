@@ -23,6 +23,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+
+      - name: Install jq, curl
+        run: |
+          sudo apt-get install -y jq curl
+
       # Runs a single command using the runners shell
       - name: Push
         run: ./script.sh

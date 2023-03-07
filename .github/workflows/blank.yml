@@ -24,4 +24,4 @@ jobs:
       - uses: actions/checkout@v3
       - uses: pushboard/clickhouse-local-github-action@clickhouse-local
         with:
-          query: "select * from file(data/*, Parquet) limit 1 FORMAT JSON"
+          query: '"select * from file(data/*, Parquet) limit 1 FORMAT JSON"'

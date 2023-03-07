@@ -22,7 +22,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-        uses: pushboard/clickhouse-local-github-action@clickhouse-local
-
+      - uses: pushboard/clickhouse-local-github-action@clickhouse-local
         with:
           query: "select * from file(data/*, Parquet) limit 1 FORMAT JSON"

@@ -65,3 +65,18 @@ curl \
   --request POST 'https://pushboard.io/api/carddata/nweicscisp/' \
   --header 'Content-Type: application/json' \
   --data-binary @-
+
+
+# Number of trips by pickup location
+clickhouse-local \
+-q "select PULocationID x__PULocation, count(*) y1__num_trips 
+from file('data/green_tripdata/*', 'Parquet')
+group by x__PULocation order by y1__num_trips desc
+limit 10
+FORMAT JSON
+SETTINGS input_format_parquet_skip_columns_with_unsupported_types_in_schema_inference = True" |
+jq '. + {"title": "Top 10 pick up locations"}' |
+curl \
+  --request POST 'https://pushboard.io/api/carddata/gostv9st73/' \
+  --header 'Content-Type: application/json' \
+  --data-binary @-

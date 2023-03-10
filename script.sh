@@ -15,7 +15,7 @@ curl \
 
 # Total trip distance
 clickhouse-local \
--q "SELECT sum(trip_distance) y1__total_distance
+-q "SELECT floor(sum(trip_distance), 2) y1__total_distance
 FROM file('data/green_tripdata/*', 'Parquet')
 FORMAT JSON
 SETTINGS input_format_parquet_skip_columns_with_unsupported_types_in_schema_inference = True" |
@@ -28,7 +28,7 @@ curl \
 
 # Total fare amount
 clickhouse-local \
--q "SELECT sum(fare_amount) y1__total_fare_amount
+-q "SELECT floor(sum(fare_amount), 2) y1__total_fare_amount
 FROM file('data/green_tripdata/*', 'Parquet')
 FORMAT JSON
 SETTINGS input_format_parquet_skip_columns_with_unsupported_types_in_schema_inference = True" |

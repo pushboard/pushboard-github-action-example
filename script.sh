@@ -46,7 +46,7 @@ curl \
 clickhouse-local \
 -q "select toMonth(lpep_pickup_datetime) x__month, count(*) y1__num_trips 
 from file('data/green_tripdata/*', 'Parquet')
-where passenger_count >=1 
+where passenger_count >=1 and toMonth(lpep_pickup_datetime) <= 11
 group by x__month order by x__month 
 FORMAT JSON
 SETTINGS input_format_parquet_skip_columns_with_unsupported_types_in_schema_inference = True" |

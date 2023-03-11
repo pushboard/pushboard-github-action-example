@@ -118,3 +118,16 @@ curl \
   --header 'Content-Type: application/json' \
   --data-binary @-
 
+# Tip count
+clickhouse-local \
+-q "select if(tip_amount >0, 'Tip', 'No Tip') as x__tip, count(*) as y1__count 
+FROM file('data/green_tripdata/*', 'Parquet') 
+where passenger_count >=1 
+group by x__tip
+FORMAT JSON
+SETTINGS input_format_parquet_skip_columns_with_unsupported_types_in_schema_inference = True" |
+jq '. + {"title": "Tipping vs No Tipping"}' |
+curl \
+  --request POST 'https://pushboard.io/api/carddata/7uznfi6q9p/' \
+  --header 'Content-Type: application/json' \
+  --data-binary @-

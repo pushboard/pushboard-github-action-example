@@ -106,7 +106,7 @@ curl \
 
 # Toll count
 clickhouse-local \
--q "select if(total_amount >0, 'Toll', 'No Toll') as x__toll, count(*) as y1__count 
+-q "select if(toll_amount > 0, 'Toll', 'No Toll') as x__toll, count(*) as y1__count 
 FROM file('data/green_tripdata/*', 'Parquet') 
 where passenger_count >=1 
 group by x__toll 
@@ -120,7 +120,7 @@ curl \
 
 # Tip count
 clickhouse-local \
--q "select if(tip_amount >0, 'Tip', 'No Tip') as x__tip, count(*) as y1__count 
+-q "select if(tip_amount > 0, 'Tip', 'No Tip') as x__tip, count(*) as y1__count 
 FROM file('data/green_tripdata/*', 'Parquet') 
 where passenger_count >=1 
 group by x__tip

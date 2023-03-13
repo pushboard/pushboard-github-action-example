@@ -1,6 +1,8 @@
 #!/bin/sh
 
 # Trip count
+PUSHKEY=$1
+
 clickhouse-local \
 -q "SELECT count(*) y1__num_trips
 FROM file('data/green_tripdata/*', 'Parquet') 
@@ -11,6 +13,7 @@ jq '. + {"title": "Total Trips"}' |
 curl \
   --request POST 'https://pushboard.io/api/carddata/4oi8rehmn3/' \
   --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer '$PUSH_KEY \
   --data-binary @-
 
 
@@ -25,6 +28,7 @@ jq '. + {"title": "Total Distance"}' |
 curl \
   --request POST 'https://pushboard.io/api/carddata/87r5ilczxx/' \
   --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer '$PUSHKEY \
   --data-binary @-
 
 
@@ -39,6 +43,7 @@ jq '. + {"title": "Total Revenue"}' |
 curl \
   --request POST 'https://pushboard.io/api/carddata/d7jnqwthvw/' \
   --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer '$PUSHKEY \
   --data-binary @-
 
 
@@ -54,6 +59,7 @@ jq '. + {"title": "# Trips by month"}' |
 curl \
   --request POST 'https://pushboard.io/api/carddata/yi49iogxde/' \
   --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer '$PUSHKEY \
   --data-binary @-
 
 
@@ -69,6 +75,7 @@ jq '. + {"title": "# Trips by hour"}' |
 curl \
   --request POST 'https://pushboard.io/api/carddata/nweicscisp/' \
   --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer '$PUSHKEY \
   --data-binary @-
 
 
@@ -85,6 +92,7 @@ jq '. + {"title": "Avg, mdn distance by hour"}' |
 curl \
   --request POST 'https://pushboard.io/api/carddata/0axb9vs2j2/' \
   --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer '$PUSHKEY \
   --data-binary @-
 
 
@@ -101,6 +109,7 @@ jq '. + {"title": "Top 10 pick up locations"}' |
 curl \
   --request POST 'https://pushboard.io/api/carddata/gostv9st73/' \
   --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer '$PUSHKEY \
   --data-binary @-
 
 
@@ -116,6 +125,7 @@ jq '. + {"title": "Tolls vs No Tolls"}' |
 curl \
   --request POST 'https://pushboard.io/api/carddata/3ayjjwlyrw/' \
   --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer '$PUSHKEY \
   --data-binary @-
 
 # Tip count
@@ -130,4 +140,5 @@ jq '. + {"title": "Tipping vs No Tipping"}' |
 curl \
   --request POST 'https://pushboard.io/api/carddata/7uznfi6q9p/' \
   --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer '$PUSHKEY \
   --data-binary @-

@@ -13,7 +13,7 @@ jq '. + {"title": "Total Trips"}' |
 curl \
   --request POST 'https://pushboard.io/api/carddata/4oi8rehmn3/' \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer '$PUSH_KEY \
+  --header 'Authorization: Bearer '$PUSHKEY \
   --data-binary @-
 
 
